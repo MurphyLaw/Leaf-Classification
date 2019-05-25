@@ -3,20 +3,20 @@
 
 ### Libraries
 
-Python 3.7
-pip install
-pip install tensorflow
-pip install keras
-pip install sklearn
-pip install matplotlib
-pip install imutils
-pip install numpy
-pip install argparse
-pip install random
-pip install pickle
-pip install cv2
-pip install os
-pip install kivy
+* Python 3.7
+* Install pip
+* pip install tensorflow
+* pip install keras
+* pip install sklearn
+* pip install matplotlib
+* pip install imutils
+* pip install numpy
+* pip install argparse
+* pip install random
+* pip install pickle
+* pip install cv2
+* pip install os
+* pip install kivy
 
 ### Training
 
