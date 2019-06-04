@@ -3,36 +3,32 @@
 ConnectPage:
     BoxLayout:
         orientation:'vertical'
-        AnchorLayout:
-            anchor_x:'center'
-            anchor_y:'top'
-            BoxLayout:
-                size_hint_y: None
-                height: 30
-                Button:
-                    id: model
-                    text: root.model
-                    on_release: root.model_button()
-                Button:
-                    id: labelbin
-                    text: root.labelbin
-                    on_release: root.labelBin_button()
-                Button:
-                    text: 'Find an Image'
-                    on_release: root.findImage_button()
-        Label:
-            id: labelclassification
-            text_size:(250, None)
-            font_size:30
-            text:''
-            outline_color:[0,0,0]
-        AnchorLayout:
-            anchor_x:'left'
-            anchor_y:'top'
-            Image:
-                id: image
-                source:root.source
-                allow_stretch: True
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                id: model
+                text: root.model
+                on_release: root.model_button()
+            Button:
+                id: labelbin
+                text: root.labelbin
+                on_release: root.labelBin_button()
+            Button:
+                id: resetbutton
+                text: 'Reset'
+                on_release: root.reset_button()
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Label:
+                padding: (10,10)
+                halign:'center'
+                valign:'top'
+                id: labelclassification
+                font_size:30
+                text:root.source
+                outline_color:[0,0,0]
         AnchorLayout:
             anchor_x:'center'
             anchor_y:'bottom'
