@@ -12,7 +12,7 @@ from collections import deque
 
 class MjpegViewer(Image):
 
-    url = StringProperty()
+    url = "http://localhost:5000/video_feed"
 
     def start(self):
         self.quit = False
@@ -55,16 +55,3 @@ class MjpegViewer(Image):
         if im is not None:
             self.texture = im.texture
             self.texture_size = im.texture.size
-
-
-# if __name__ == "__main__":
-
-class MjpegViewerApp(App):
-    def build(self):
-        viewer = MjpegViewer(
-            url=
-            "http://localhost:5000/video_feed")
-        viewer.start()
-        return viewer
-
-# MjpegViewerApp().run()

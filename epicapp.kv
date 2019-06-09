@@ -18,17 +18,40 @@ ConnectPage:
                 id: resetbutton
                 text: 'Reset'
                 on_release: root.reset_button()
-        BoxLayout:
-            size_hint_y: None
-            height: 30
-            Label:
-                padding: (10,10)
-                halign:'center'
-                valign:'top'
-                id: labelclassification
-                font_size:30
-                text:root.source
-                outline_color:[0,0,0]
+        FloatLayout:
+            MjpegViewer:
+                size_hint: None, None
+                size: 1000, 500
+                pos: 0, 125
+                src: self.start()
+
+            RelativeLayout:
+                size_hint: None, None
+                size: 325, 600
+                pos: 1000, 30.5
+                BoxLayout:
+                    orientation:'vertical'
+                    size_hint: 1, None
+                    height:600
+                    pos_hint:{'top': 1}
+                    Label:
+                        size_hint_y: None
+                        height: 30
+                        text_size: (325, 30)
+                        id: labelclassificationname
+                        font_size:30
+                        text:""
+                        outline_color:[0,0,0]
+                    Label:
+                        valign:'top'
+                        padding_y:10
+                        height: 570
+                        text_size: (325, 570)
+                        id: labelclassificationdesc
+                        font_size:15
+                        text:""
+                        outline_color:[0,0,0]   
+                
         AnchorLayout:
             anchor_x:'center'
             anchor_y:'bottom'

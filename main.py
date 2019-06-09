@@ -10,6 +10,7 @@ from kivy.factory import Factory
 from kivy.uix.image import Image
 from kivy.clock import Clock
 from kivy.network.urlrequest import UrlRequest
+from kivy.core.window import Window
 # from pyimagesearch.classify import ClassifyImage
 import argparse
 from flask import Flask, jsonify, render_template, Response
@@ -18,31 +19,20 @@ from logging import Logger
 import cv2
 import time
 from camera_opencv import Camera
+import csv
+import json
 
 from mjpegviewer import MjpegViewer
 
 kivy.require("1.10.1")
 app = Flask(__name__)
 
-scanning = False
+scanning = True
 source = ""
+leafs = []
 
-leafs = {
-    1: "January",
-    2: "February",
-    3: "March",
-    4: "April",
-    5: "May",
-    6: "June",
-    7: "July",
-    8: "August",
-    9: "September",
-    10: "October",
-    11: "November",
-    12: "December"
-}
-
-
+with open('leafs.csv') as csv_file:
+    leafs =  list(csv.reader(csv_file, delimiter=','))
 
 def gen(camera):
     while True:
@@ -67,7 +57,18 @@ def get_tasks(leaf_id):
 	global source
 	global leafs
 	if scanning:
-		source = leafs.get(leaf_id, "Not in Model")
+		leafinfo = {}
+		for leaf in leafs:
+			if int(leaf[0]) == leaf_id:
+				leafinfo["name"] = leaf[1]
+				leafinfo["desc"] = leaf[2]
+				break
+		if leafinfo:
+			source = json.dumps(leafinfo, ensure_ascii=False)
+		else:
+			leafinfo["name"] = "Not in Model"
+			leafinfo["desc"] = ""
+			source = json.dumps(leafinfo, ensure_ascii=False)
 	return ''
 
 def sourceChecker():
@@ -85,17 +86,8 @@ class ConnectPage(FloatLayout):
 	data = {}
 	model = "Model"
 	labelbin = "Label Bin"
-	source = ""
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
-		self.add_widget(self.start_camera())
-
-	def start_camera(self):
-		viewer = MjpegViewer(
-		    url=
-		    "http://localhost:5000/video_feed")
-		viewer.start()
-		return viewer
 
 	def findImage_button(self):
 		self.show_load("Image")
@@ -110,9 +102,11 @@ class ConnectPage(FloatLayout):
 		self.data.update(information)
 
 	def classify_button(self):
-		self.ids.labelclassification.text = "Scanning..."
+		self.ids.labelclassificationname.text = "Scanning..."
 		def got_json(req, result):
-			self.ids.labelclassification.text = result
+			leaf = json.loads(result)
+			self.ids.labelclassificationname.text = leaf["name"]
+			self.ids.labelclassificationdesc.text = leaf["desc"]
 		UrlRequest('http://localhost:5000/setting', got_json)
 
 	def dismiss_popup(self):
@@ -129,7 +123,8 @@ class ConnectPage(FloatLayout):
 		global source
 		scanning = False
 		source = ""
-		self.ids.labelclassification.text = ""
+		self.ids.labelclassificationname.text = ""
+		self.ids.labelclassificationdesc.text = ""
 
 	def load(self, path, filename):
 		if filename[0].find(".model") > 0:
@@ -165,4 +160,6 @@ class FlaskThread(Thread):
 Factory.register('ConnectPage', cls=ConnectPage)
 
 if __name__ == "__main__":
+	Window.size = (1366, 768)
+	Window.fullscreen = True
 	EpicApp().run()
