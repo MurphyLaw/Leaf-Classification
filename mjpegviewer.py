@@ -1,9 +1,9 @@
 
 import io
 # for windows
-# import urllib.request
+import urllib.request
 # for Ubuntu
-from urllib2 import urlopen
+# from urllib2 import urlopen
 import threading
 from kivy.uix.image import Image
 from kivy.app import App
@@ -11,13 +11,14 @@ from kivy.properties import StringProperty
 from kivy.core.image import Image as CoreImage
 from kivy.clock import Clock
 from collections import deque
-
+import time
 
 class MjpegViewer(Image):
 
     url = "http://localhost:5000/video_feed"
 
     def start(self):
+        time.sleep(2)
         self.quit = False
         self._queue = deque()
         self._thread = threading.Thread(target=self.read_stream)
@@ -34,9 +35,9 @@ class MjpegViewer(Image):
 
     def read_stream(self):
 # for Windows
-        # stream = urllib.request.urlopen(self.url)
+        stream = urllib.request.urlopen(self.url)
 	# for Ubuntu
-	stream = urlopen(self.url)
+	# stream = urlopen(self.url)
         bytes = b''
         while not self.quit:
             bytes += stream.read(1024)
