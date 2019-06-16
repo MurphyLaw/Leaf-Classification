@@ -6,3 +6,4 @@ pyimagesearch/lb.pickle
 pyimagesearch/leaf.model
 pyimagesearch/plot.png
 __pycache__/
+kivy_venv/
