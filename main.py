@@ -24,14 +24,17 @@ import json
 
 from mjpegviewer import MjpegViewer
 
+# For Windows
 kivy.require("1.10.1")
+# For Ubuntu
+# kivy.require("1.9.1")
 app = Flask(__name__)
 
 scanning = True
 source = ""
 leafs = []
 
-with open('leafs.csv') as csv_file:
+with open('leafs.csv', encoding='windows-1252') as csv_file:
     leafs =  list(csv.reader(csv_file, delimiter=','))
 
 def gen(camera):
@@ -87,7 +90,10 @@ class ConnectPage(FloatLayout):
 	model = "Model"
 	labelbin = "Label Bin"
 	def __init__(self, **kwargs):
-		super().__init__(**kwargs)
+		# for Windows
+		# super().__init__(**kwargs)
+		# for Ubuntu
+		super(ConnectPage, self).__init__(**kwargs)
 
 	def findImage_button(self):
 		self.show_load("Image")
