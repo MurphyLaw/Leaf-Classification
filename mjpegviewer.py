@@ -18,7 +18,6 @@ class MjpegViewer(Image):
     url = "http://localhost:5000/video_feed"
 
     def start(self):
-        time.sleep(2)
         self.quit = False
         self._queue = deque()
         self._thread = threading.Thread(target=self.read_stream)
@@ -35,6 +34,7 @@ class MjpegViewer(Image):
 
     def read_stream(self):
 # for Windows
+        time.sleep(2)
         stream = urllib.request.urlopen(self.url)
 	# for Ubuntu
 	# stream = urlopen(self.url)
