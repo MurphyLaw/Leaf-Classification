@@ -1,6 +1,9 @@
 
 import io
-import urllib.request
+# for windows
+# import urllib.request
+# for Ubuntu
+from urllib2 import urlopen
 import threading
 from kivy.uix.image import Image
 from kivy.app import App
@@ -30,7 +33,10 @@ class MjpegViewer(Image):
         Clock.unschedule(self.read_queue)
 
     def read_stream(self):
-        stream = urllib.request.urlopen(self.url)
+# for Windows
+        # stream = urllib.request.urlopen(self.url)
+	# for Ubuntu
+	stream = urlopen(self.url)
         bytes = b''
         while not self.quit:
             bytes += stream.read(1024)
