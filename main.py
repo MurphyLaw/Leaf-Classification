@@ -65,13 +65,29 @@ def get_tasks(leaf_id):
 			if int(leaf[0]) == leaf_id:
 				leafinfo["name"] = leaf[1]
 				leafinfo["desc"] = leaf[2]
+				leafinfo["header1"] = leaf[3]
+				leafinfo["ways"] = leaf[4]
+				leafinfo["header2"] = leaf[5]
+				leafinfo["medicinal"] = leaf[6]
 				break
 		if leafinfo:
 			source = json.dumps(leafinfo, ensure_ascii=False)
 		else:
-			leafinfo["name"] = "Not in Model"
+			leafinfo["name"] = ""
 			leafinfo["desc"] = ""
+			leafinfo["header1"] = "Not in Model"
+			leafinfo["ways"] = ""
+			leafinfo["header2"] = ""
+			leafinfo["medicinal"] = ""
 			source = json.dumps(leafinfo, ensure_ascii=False)
+	else:
+		leafinfo["name"] = ""
+		leafinfo["desc"] = ""
+		leafinfo["header1"] = ""
+		leafinfo["ways"] = ""
+		leafinfo["header2"] = ""
+		leafinfo["medicinal"] = ""
+		source = json.dumps(leafinfo, ensure_ascii=False)
 	return ''
 
 def sourceChecker():
@@ -89,6 +105,7 @@ class ConnectPage(FloatLayout):
 	data = {}
 	model = "Model"
 	labelbin = "Label Bin"
+	resetbut = True
 	def __init__(self, **kwargs):
 		# for Windows
 		# super().__init__(**kwargs)
@@ -108,12 +125,32 @@ class ConnectPage(FloatLayout):
 		self.data.update(information)
 
 	def classify_button(self):
-		self.ids.labelclassificationname.text = "Scanning..."
-		def got_json(req, result):
-			leaf = json.loads(result)
-			self.ids.labelclassificationname.text = leaf["name"]
-			self.ids.labelclassificationdesc.text = leaf["desc"]
-		UrlRequest('http://localhost:5000/setting', got_json)
+		if self.resetbut:
+			self.ids.resetbutton.text = "Reset"
+			self.ids.labelclassificationlabel1.text = "Scanning..."
+			def got_json(req, result):
+				leaf = json.loads(result)
+				self.ids.labelclassificationname.text = leaf["name"]
+				self.ids.labelclassificationdesc.text = leaf["desc"]
+				self.ids.labelclassificationlabel1.text = leaf["header1"]
+				self.ids.labelclassificationways.text = leaf["ways"]
+				self.ids.labelclassificationlabel2.text = leaf["header2"]
+				self.ids.labelclassificationmedicine.text = leaf["medicinal"]
+			UrlRequest('http://localhost:5000/setting', got_json)
+			self.resetbut = False
+		else:
+			global scanning
+			global source
+			scanning = False
+			source = ""
+			self.ids.resetbutton.text = "Classify Image"
+			self.ids.labelclassificationname.text = ""
+			self.ids.labelclassificationdesc.text = ""
+			self.ids.labelclassificationlabel1.text = ""
+			self.ids.labelclassificationways.text = ""
+			self.ids.labelclassificationlabel2.text = ""
+			self.ids.labelclassificationmedicine.text = ""
+			self.resetbut = True
 
 	def dismiss_popup(self):
 		self._popup.dismiss()
