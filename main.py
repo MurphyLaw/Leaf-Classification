@@ -204,5 +204,5 @@ Factory.register('ConnectPage', cls=ConnectPage)
 
 if __name__ == "__main__":
 	Window.size = (1366, 768)
-	Window.fullscreen = True
+	Window.fullscreen = 'auto'
 	EpicApp().run()
