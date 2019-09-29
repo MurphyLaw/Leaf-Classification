@@ -9,6 +9,14 @@ ConnectPage:
                 id: resetbutton
                 text: 'Classify Image'
                 on_release: root.classify_button()
+            Button:
+                id: resetbutton
+                text: 'Show Use'
+                on_release: root.show_use()
+            Button:
+                id: resetbutton
+                text: 'Show Ways'
+                on_release: root.show_ways()
         BoxLayout:
             BoxLayout:
                 orientation:'vertical'
@@ -26,6 +34,7 @@ ConnectPage:
                     id: labelclassificationdesc
                     text:""
                     outline_color:[0,0,0]
+                    color:[1,1,1,0]
             BoxLayout:
                 orientation:'vertical'
                 Label:
@@ -41,6 +50,7 @@ ConnectPage:
                     id: labelclassificationways
                     text:""
                     outline_color:[0,0,0]
+                    color:[1,1,1,0]
             BoxLayout:
                 orientation:'vertical'
                 Label:
