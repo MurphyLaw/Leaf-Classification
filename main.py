@@ -103,6 +103,8 @@ class LoadDialog(FloatLayout):
 
 class ConnectPage(FloatLayout):
 	data = {}
+	use_visible = False
+	ways_visible = False
 	model = "Model"
 	labelbin = "Label Bin"
 	resetbut = True
