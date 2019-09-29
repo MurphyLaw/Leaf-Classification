@@ -115,6 +115,22 @@ class ConnectPage(FloatLayout):
 	def findImage_button(self):
 		self.show_load("Image")
 
+	def show_use(self):
+		if self.ways_visible:
+			self.ids.labelclassificationways.color = [1,1,1,1]
+			self.ways_visible = not self.ways_visible;
+		else:
+			self.ids.labelclassificationways.color = [1,1,1,0]
+			self.ways_visible = not self.ways_visible;
+
+	def show_ways(self):
+		if self.use_visible:
+			self.ids.labelclassificationmedicine.color = [1,1,1,1]
+			self.use_visible = not self.use_visible;
+		else:
+			self.ids.labelclassificationmedicine.color = [1,1,1,0]
+			self.use_visible = not self.use_visible;
+
 	def labelBin_button(self):
 		self.show_load("LabelBin")
 
