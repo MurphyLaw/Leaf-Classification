@@ -1,0 +1,17 @@
+--create a file .desktop 
+ex: leaf.desktop
+
+[Desktop Entry]
+Version=1.0
+Exec=gnome-terminal -e /home/ubuntu/Desktop/leaf.sh
+Name=Leaf
+GenericName=Leaf
+Comment=Leaf
+Encoding=UTF-8
+Terminal=false
+Type=Application
+Categories=Application;
+Icon=/home/ubuntu/Downloads/leaf.png
+
+--create a bash file leaf.sh
+python3 ~/Desktop/Leaf-Classification/main.py;bash
