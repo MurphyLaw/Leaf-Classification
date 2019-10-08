@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Exec=gnome-terminal -e /home/thesis/Leaf-Classification/leaf.sh
+Name=Leaf
+GenericName=Leaf
+Comment=Leaf
+Encoding=UTF-8
+Terminal=false
+Type=Application
+Categories=Application;
+Icon=/home/thesis/Leaf-Classification/leaf.png
