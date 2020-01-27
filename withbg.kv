@@ -1,0 +1,100 @@
+#:kivy 1.1.0
+ConnectPage:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'bg.jpg'
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                id: resetbutton
+                text: 'Classify Image'
+                on_release: root.classify_button()
+            Button:
+                id: showusebutton
+                text: 'Show Use'
+                on_release: root.show_use()
+            Button:
+                id: showwaysbutton
+                text: 'Show Ways'
+                on_release: root.show_ways()
+        BoxLayout:
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    size_hint_y: None
+                    height: 30
+                    id: labelclassificationname
+                    font_size:25
+                    text:""
+                    outline_color:[0,0,0]
+                Label:
+                    valign: 'top'
+                    padding_x: [-10,0]
+                    text_size: (300, 300)
+                    id: labelclassificationdesc
+                    text:""
+                    outline_color:[0,0,0]
+                    color:[1,1,1,0]
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    size_hint_y: None
+                    height: 30
+                    id: labelclassificationlabel1
+                    font_size:25
+                    text:""
+                    outline_color:[0,0,0]
+                Label:
+                    valign: 'top'
+                    text_size: (300, 300)
+                    id: labelclassificationways
+                    text:""
+                    outline_color:[0,0,0]
+                    color:[1,1,1,0]
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    size_hint_y: None
+                    height: 30
+                    id: labelclassificationlabel2
+                    font_size:25
+                    text:""
+                    outline_color:[0,0,0]
+                Label:
+                    valign: 'top'
+                    text_size: (300, 300)
+                    id: labelclassificationmedicine
+                    text:""
+                    outline_color:[0,0,0]
+                    color:[1,1,1,0]
+
+        FloatLayout:
+            MjpegViewer:
+                size_hint: None, None
+                size: 750, 400
+                pos: 300, 0
+                src: self.start()
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
