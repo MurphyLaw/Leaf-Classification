@@ -1,5 +1,10 @@
 #:kivy 1.1.0
 ConnectPage:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'test.png'
     BoxLayout:
         orientation:'vertical'
         BoxLayout:
