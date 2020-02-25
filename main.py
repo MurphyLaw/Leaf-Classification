@@ -69,6 +69,8 @@ def get_tasks(leaf_id):
 				leafinfo["ways"] = leaf[4]
 				leafinfo["header2"] = leaf[5]
 				leafinfo["medicinal"] = leaf[6]
+				leafinfo["header3"] = leaf[7]
+				leafinfo["medicinala"] = leaf[4]
 				break
 		if leafinfo:
 			source = json.dumps(leafinfo, ensure_ascii=False)
@@ -79,6 +81,8 @@ def get_tasks(leaf_id):
 			leafinfo["ways"] = ""
 			leafinfo["header2"] = ""
 			leafinfo["medicinal"] = ""
+			leafinfo["header3"] = ""
+			leafinfo["medicinala"] = ""
 			source = json.dumps(leafinfo, ensure_ascii=False)
 	else:
 		leafinfo["name"] = ""
@@ -87,6 +91,8 @@ def get_tasks(leaf_id):
 		leafinfo["ways"] = ""
 		leafinfo["header2"] = ""
 		leafinfo["medicinal"] = ""
+		leafinfo["header3"] = ""
+		leafinfo["medicinala"] = ""
 		source = json.dumps(leafinfo, ensure_ascii=False)
 	return ''
 
@@ -105,6 +111,7 @@ class ConnectPage(FloatLayout):
 	data = {}
 	use_visible = False
 	ways_visible = False
+	waysa_visible = False
 	model = "Model"
 	labelbin = "Label Bin"
 	resetbut = True
@@ -133,6 +140,14 @@ class ConnectPage(FloatLayout):
 			self.ids.labelclassificationmedicine.color = [1,1,1,0]
 			self.use_visible = not self.use_visible;
 
+	def show_waysa(self):
+		if self.waysa_visible:
+			self.ids.labelclassificationmedicine.color = [1,1,1,1]
+			self.waysa_visible = not self.waysa_visible;
+		else:
+			self.ids.labelclassificationmedicine.color = [1,1,1,0]
+			self.waysa_visible = not self.waysa_visible;
+
 	def labelBin_button(self):
 		self.show_load("LabelBin")
 
@@ -154,6 +169,8 @@ class ConnectPage(FloatLayout):
 				self.ids.labelclassificationways.text = leaf["ways"]
 				self.ids.labelclassificationlabel2.text = leaf["header2"]
 				self.ids.labelclassificationmedicine.text = leaf["medicinal"]
+				self.ids.labelclassificationlabel3.text = leaf["header3"]
+				self.ids.labelclassificationmedicinea.text = leaf["medicinala"]
 			UrlRequest('http://localhost:5000/setting', got_json)
 			self.resetbut = False
 		else:
@@ -168,6 +185,8 @@ class ConnectPage(FloatLayout):
 			self.ids.labelclassificationways.text = ""
 			self.ids.labelclassificationlabel2.text = ""
 			self.ids.labelclassificationmedicine.text = ""
+			self.ids.labelclassificationlabel3.text = ""
+			self.ids.labelclassificationmedicinea.text = ""
 			self.resetbut = True
 
 	def dismiss_popup(self):
