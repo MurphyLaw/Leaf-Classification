@@ -4,32 +4,41 @@ ConnectPage:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'test.png'
+            source: 'bg.jpg'
     BoxLayout:
         orientation:'vertical'
         BoxLayout:
             size_hint_y: None
-            height: 30
+            height: 80
             Button:
                 id: resetbutton
-                text: 'Classify Image'
+                text: 'Classify Leaf'
+                font_size:30
                 on_release: root.classify_button()
             Button:
                 id: showusebutton
-                text: 'Show Use'
+                text: 'Preparation A and B'
+                font_size:30
                 on_release: root.show_use()
             Button:
-                id: showwaysbutton
-                text: 'Show Ways'
+                id: showwaysabutton
+                text: 'Preparation C and D'
+                font_size:30
                 on_release: root.show_ways()
+            Button:
+                id: showwaysabutton
+                text: 'Preparation E and F'
+                font_size:30
+                on_release: root.show_waysa()
+
         BoxLayout:
             BoxLayout:
                 orientation:'vertical'
                 Label:
                     size_hint_y: None
-                    height: 30
+                    height: 300
                     id: labelclassificationname
-                    font_size:25
+                    font_size:22
                     text:""
                     outline_color:[0,0,0]
                 Label:
@@ -44,15 +53,16 @@ ConnectPage:
                 orientation:'vertical'
                 Label:
                     size_hint_y: None
-                    height: 30
+                    height: 10
                     id: labelclassificationlabel1
                     font_size:25
                     text:""
                     outline_color:[0,0,0]
                 Label:
                     valign: 'top'
-                    text_size: (300, 300)
+                    text_size: (300, 350)
                     id: labelclassificationways
+                    font_size:20
                     text:""
                     outline_color:[0,0,0]
                     color:[1,1,1,0]
@@ -60,15 +70,33 @@ ConnectPage:
                 orientation:'vertical'
                 Label:
                     size_hint_y: None
-                    height: 30
+                    height: 330
                     id: labelclassificationlabel2
                     font_size:25
                     text:""
                     outline_color:[0,0,0]
                 Label:
                     valign: 'top'
-                    text_size: (300, 300)
+                    text_size: (300, 670)
+                    font_size:20
                     id: labelclassificationmedicine
+                    text:""
+                    outline_color:[0,0,0]
+                    color:[1,1,1,0]
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    size_hint_y: None
+                    height: 450
+                    id: labelclassificationlabel3
+                    font_size:20
+                    text:""
+                    outline_color:[0,0,0]
+                Label:
+                    valign: 'top'
+                    text_size: (300, 2000)
+                    font_size:18
+                    id: labelclassificationmedicinea
                     text:""
                     outline_color:[0,0,0]
                     color:[1,1,1,0]
@@ -76,8 +104,8 @@ ConnectPage:
         FloatLayout:
             MjpegViewer:
                 size_hint: None, None
-                size: 750, 400
-                pos: 300, 0
+                size: 670, 350
+                pos: 350, 0
                 src: self.start()
 
 <LoadDialog>:
