@@ -173,6 +173,12 @@ class ConnectPage(FloatLayout):
 				self.ids.labelclassificationmedicinea.text = leaf["medicinala"]
 			UrlRequest('http://localhost:5000/setting', got_json)
 			self.resetbut = False
+			self.use_visible = True
+			self.ways_visible = True
+			self.waysa_visible = True
+			self.ids.labelclassificationways.color = [1,1,1,0]
+			self.ids.labelclassificationmedicine.color = [1,1,1,0]
+			self.ids.labelclassificationmedicinea.color = [1,1,1,0]
 		else:
 			global scanning
 			global source
@@ -188,6 +194,9 @@ class ConnectPage(FloatLayout):
 			self.ids.labelclassificationlabel3.text = ""
 			self.ids.labelclassificationmedicinea.text = ""
 			self.resetbut = True
+			self.use_visible = False
+			self.ways_visible = False
+			self.waysa_visible = False
 
 	def dismiss_popup(self):
 		self._popup.dismiss()
