@@ -69,8 +69,8 @@ def get_tasks(leaf_id):
 				leafinfo["ways"] = leaf[4]
 				leafinfo["header2"] = leaf[5]
 				leafinfo["medicinal"] = leaf[6]
-				leafinfo["header3"] = leaf[7]
-				leafinfo["medicinala"] = leaf[4]
+				leafinfo["header3"] = ""
+				leafinfo["medicinala"] = leaf[7]
 				break
 		if leafinfo:
 			source = json.dumps(leafinfo, ensure_ascii=False)
@@ -142,10 +142,10 @@ class ConnectPage(FloatLayout):
 
 	def show_waysa(self):
 		if self.waysa_visible:
-			self.ids.labelclassificationmedicine.color = [1,1,1,1]
+			self.ids.labelclassificationmedicinea.color = [1,1,1,1]
 			self.waysa_visible = not self.waysa_visible;
 		else:
-			self.ids.labelclassificationmedicine.color = [1,1,1,0]
+			self.ids.labelclassificationmedicinea.color = [1,1,1,0]
 			self.waysa_visible = not self.waysa_visible;
 
 	def labelBin_button(self):
